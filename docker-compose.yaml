@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  api:
+    build: ./api
+    container_name: api_c
+    ports:
+      - '4000:4000'
+    volumes: 
+      - ./api:/app # maps the api folder to the app folder in the container
+      - ./app/node_modules # makes sure the the node_modules folder does not get deleted
+  myblog:
+    build: ./myblog
+    container_name: mynlog_c
+    ports: 
+      - '3000:3000'
+    volumes:
+      - ./myblog:/app
+      - ./app/node_modules
+    # starts the container with interactive mode, means the the react container won't automatically shut down
+    stdin_open: true
+    tty: true
+
